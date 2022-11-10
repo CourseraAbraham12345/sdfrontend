@@ -24,14 +24,14 @@ class CreateNote extends Component {
     }
 
     async componentDidMount(){
-        const res = await axios.get('http://localhost:4000/api/users')
+        const res = await axios.get('https://sd-practica-4-notasmasapi.herokuapp.com/users')
         this.setState({
            users: res.data,
            userSelected: res.data[0].username
         })
 
         if(this.props.params.id){
-            const res = await axios.get('http://localhost:4000/api/notes/' + this.props.params.id);
+            const res = await axios.get('https://sd-practica-4-notasmasapi.herokuapp.com/notes' + this.props.params.id);
             this.setState({
                 title: res.data.title,
                 content: res.data.content,
@@ -52,9 +52,9 @@ class CreateNote extends Component {
             author: this.state.userSelected
         }
         if(this.state.editing){
-            await axios.put('http://localhost:4000/api/notes/' + this.state._id, newNote)
+            await axios.put('https://sd-practica-4-notasmasapi.herokuapp.com/notes' + this.state._id, newNote)
         }else{
-            await axios.post('http://localhost:4000/api/notes', newNote);
+            await axios.post('https://sd-practica-4-notasmasapi.herokuapp.com/notes', newNote);
         }
 
         window.location.href = '/';
